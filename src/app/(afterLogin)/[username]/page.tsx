@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function Username() {
-  return <div>Username</div>;
+  return <div>프로필 페이지</div>;
 }

@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Message() {
-  return <div>Message</div>;
+  return <div>쪽지 페이지</div>;
 }

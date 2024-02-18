@@ -12,7 +12,6 @@
 }
 
 .leftSection {
-  background-color: blueviolet;
   width: 275px;
   height: 100dvh;
 }
@@ -79,7 +78,6 @@
 }
 
 .rightSectionInner {
-  background-color: blue;
   height: 100%;
   width: 990px;
   display: flex;
@@ -92,13 +90,18 @@
 }
 
 .rightSection {
-  background-color: rgb(162, 1, 255);
   width: 350px;
   height: 100%;
 }
 
+.searchWrap {
+  padding-top: 60px;
+  width: inherit;
+}
+
 .search {
   position: fixed;
+  top: 0;
   height: 42px;
   width: inherit;
   border-radius: 21px;
@@ -121,7 +124,6 @@
   padding: 12px;
   margin-left: 5px;
   font-size: 15px;
-  width: calc(100% - 60px);
 }
 
 .followRecommend {

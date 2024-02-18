@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Explore() {
-  return <div>Explore</div>;
+  return <div>검색페이지</div>;
 }
