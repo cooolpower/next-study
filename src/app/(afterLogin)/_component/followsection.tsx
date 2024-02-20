@@ -26,10 +26,10 @@ export default function FollowRecommend() {
 		fetchData();
 	}, []);
 
-
 	return (
 		<div className={style.followSectionWrap}>
-			{followdata.map((item, idx) => (
+			<h3>팔로우 추천</h3>
+			{followdata.slice(0, 3).map((item, idx) => (
 				<Follow
 					key={Math.random()}
 					size={30}
@@ -37,13 +37,6 @@ export default function FollowRecommend() {
 						name: item.name,
 						username: item.username,
 						image: "/yRsRRjGO.jpg",
-						email: item.email,
-						address:
-							item.address.street +
-							" " +
-							item.address.suite +
-							" " +
-							item.address.city,
 					}}
 				/>
 			))}

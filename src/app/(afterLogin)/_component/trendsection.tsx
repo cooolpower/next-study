@@ -11,11 +11,6 @@ export default function TrendSection() {
         <Trend />
         <Trend />
         <Trend />
-        <Trend />
-        <Trend />
-        <Trend />
-        <Trend />
-        <Trend />
       </div>
     </div>
   );
