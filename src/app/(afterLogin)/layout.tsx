@@ -6,7 +6,7 @@ import Image from "next/image";
 import Logo from "../../../public/zlogo.png";
 import NavMenu from "@/app/(afterLogin)/_component/navmenu";
 import TrendSection from "@/app/(afterLogin)/_component/trendsection";
-import FollowRecommend from "@/app/(afterLogin)/_component/follow";
+import FollowSection from "@/app/(afterLogin)/_component/followsection";
 import Logoutbutton from "@/app/(afterLogin)/_component/logoutbutton";
 
 type Props = {
@@ -51,7 +51,7 @@ export default function afterLoginLayout({ children }: Props) {
               </form>
               <TrendSection />
             </div>
-            <FollowRecommend />
+            <FollowSection />
           </section>
         </div>
       </div>

@@ -85,10 +85,12 @@ body {
   overflow-x: hidden;
   width: 100dvw;
   height: 100dvh;
+  background-color: #fff;
+  color: #000;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  /* color: rgb(var(--foreground-rgb)); */
   /* background: linear-gradient(
       to bottom,
       transparent,
@@ -102,8 +104,8 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
-}
+} */
