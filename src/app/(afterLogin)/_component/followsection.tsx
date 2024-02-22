@@ -29,7 +29,7 @@ export default function FollowRecommend() {
 
 	return (
 		<div className={style.followSectionWrap}>
-			{followdata.map((item, idx) => (
+			{followdata.slice(0, 3).map((item, idx) => (
 				<Follow
 					key={Math.random()}
 					size={30}
