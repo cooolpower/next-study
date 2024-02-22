@@ -16,7 +16,7 @@ type Props = {
 export default function afterLoginLayout({ children }: Props) {
   return (
     <div className={style.container}>
-      <header className={style.leftSectionWrapper}>
+      <div className={style.leftSectionWrapper}>
         <section className={style.leftSection}>
           <div className={style.leftSectionFixed}>
             <Link className={style.logo} href="/home">
@@ -35,7 +35,7 @@ export default function afterLoginLayout({ children }: Props) {
             <Logoutbutton />
           </div>
         </section>
-      </header>
+      </div>
       <div className={style.rightSectionWrapper}>
         <div className={style.rightSectionInner}>
           <main className={style.main}>{children}</main>
