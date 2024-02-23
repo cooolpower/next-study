@@ -27,8 +27,9 @@ export default function Post(){
     <article className={style.post}>
       <div className={style.postWrapper}>
         <div className={style.postUserSection}>
-          <Link href={`/${target.User.id}`} className={style.postUserImage}>
-            <img src={target.User.image} alt={target.User.nickname}/>
+          <Link href='/' className={style.postUserImage}>
+          {/* <Link href={`/${target.User.id}`} className={style.postUserImage}> */}
+            <img src={target.user.image} alt={target.user.nickname}/>
             <div className={style.postShade} />
           </Link>
         </div>
@@ -36,9 +37,9 @@ export default function Post(){
           <div className={style.postMeta}>
             <Link href='/'>
               {/* {`/${target.User.id}`} */}
-              <span className={style.postUserName}>{target.User.nickname}</span>
+              <span className={style.postUserName}>{target.user.nickname}</span>
               &nbsp;
-              <span className={style.postUserId}>@{target.User.id}</span>
+              <span className={style.postUserId}>@{target.user.id}</span>
               &nbsp;
               ·
               &nbsp;
