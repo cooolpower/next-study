@@ -3,7 +3,7 @@ import style from "./home.module.css";
 import TabProvider from "@/app/(afterLogin)/home/_components/tabprovider";
 import Tab from "@/app/(afterLogin)/home/_components/tab";
 import PostForm from "@/app/(afterLogin)/home/_components/postform";
-import Post from "@/app/(afterLogin)/home/_components/post";
+import Post from "@/app/(afterLogin)/_component/post";
 
 export default function Home() {
   return (

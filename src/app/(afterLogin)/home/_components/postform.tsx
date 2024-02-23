@@ -21,24 +21,27 @@ export default function Postform(){
     e.preventDefault();
   }
 
-  const onClickButton = () => {};
+  const onClickButton = () => {
+    imageRef.current?.click();
+  };
 
   const onSubmit: FormEventHandler = (e) => {
     e.preventDefault();
   };
 
   return (
-   <form className={style.postFrom} onSubmit={onSubmit}>
-    <div className={style.postUserSection}>
-      <div className={style.postUserImage}>
-        <img src={me.image} alt={me.id} width={40} height={40} />
+    <form className={style.postForm} onSubmit={onSubmit}>
+      <div className={style.postUserSection}>
+        <div className={style.postUserImage}>
+          <img src={me.image} alt={me.id} />
+        </div>
       </div>
       <div className={style.postInputSection}>
-        <textarea value={content} onChange={onChange} placeholder="뭔 생각 중이야?" />
+        <textarea value={content} onChange={onChange} placeholder="무슨 일이 일어나고 있나요?"/>
         <div className={style.postButtonSection}>
           <div className={style.footerButtons}>
-            <div className={style.footerButton}>
-              <input type="file" />
+            <div className={style.footerButtonLeft}>
+              <input type="file" name="imageFiles" multiple hidden ref={imageRef} />
               <button className={style.uploadButton} type="button" onClick={onClickButton}>
                 <svg width={24} viewBox="0 0 24 24" aria-hidden="true">
                   <g>
@@ -52,7 +55,6 @@ export default function Postform(){
           </div>
         </div>
       </div>
-    </div>
-   </form>
+    </form>
   )
 }
