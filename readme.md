@@ -1,5 +1,3 @@
-<link href="http://github.com/yrgoldteeth/darkdowncss/raw/master/darkdown.css" rel="stylesheet"></link> 
-
 스터디 참조
 ------
 
