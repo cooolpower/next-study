@@ -5,7 +5,8 @@ import ActionButton from "@/app/(afterLogin)/_component/actionbutton";
 // for the dayjs
 import dayjs from 'dayjs'; // dayjs 호출
 import relativeTime from 'dayjs/plugin/relativeTime'; // dayjs 상대시간 플러그인 호출
-import 'dayjs/locale/ko'; // dayjs 한글화 
+import 'dayjs/locale/ko'; // dayjs 한글 플러그인 호출
+
 
 dayjs.locale('ko');
 dayjs.extend(relativeTime);
@@ -27,16 +28,14 @@ export default function Post(){
     <article className={style.post}>
       <div className={style.postWrapper}>
         <div className={style.postUserSection}>
-          <Link href='/' className={style.postUserImage}>
-          {/* <Link href={`/${target.User.id}`} className={style.postUserImage}> */}
+          <Link href={`/${target.user.id}`} className={style.postUserImage}>
             <img src={target.user.image} alt={target.user.nickname}/>
             <div className={style.postShade} />
           </Link>
         </div>
         <div className={style.postBody}>
           <div className={style.postMeta}>
-            <Link href='/'>
-              {/* {`/${target.User.id}`} */}
+            <Link href={`/${target.user.id}`}>
               <span className={style.postUserName}>{target.user.nickname}</span>
               &nbsp;
               <span className={style.postUserId}>@{target.user.id}</span>

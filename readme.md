@@ -2,22 +2,21 @@
 ------
 
 ### 인터넷 강의
-* Next + React Query로 SNS 서비스 만들기 - https://www.inflearn.com/course/next-react-query-sns%EC%84%9C%EB%B9%84%EC%8A%A4#
-* 강의 교본 - https://github.com/ZeroCho/next-app-router-z/tree/master
-
+* <a href="https://www.inflearn.com/course/next-react-query-sns%EC%84%9C%EB%B9%84%EC%8A%A4#" target="_blank">Next + React Query로 SNS 서비스 만들기</a>
+* <a href="https://github.com/ZeroCho/next-app-router-z/tree/master" target="_blank">강의 교본</a>
 
 ### 문서
-* 리액트 한글 문서 - https://react-ko.dev/
+* <a href="https://react-ko.dev/" target="_blank">리액트 한글 문서</a>
 
 
 ### 블로그 
-* React Key - https://velog.io/@ssoon-m/react-key-%EC%A0%9C%EB%8C%80%EB%A1%9C-%EB%8B%A4%EB%A3%A8%EA%B8%B0
-* 리액트 랜더링 및 최적화 - https://www.nextree.io/riaegteu-rendeoring-mic-coejeoghwa/
-* 벨로퍼트와 함께하는 모던 리액트 - https://react.vlpt.us/
+* <a href="https://velog.io/@ssoon-m/react-key-%EC%A0%9C%EB%8C%80%EB%A1%9C-%EB%8B%A4%EB%A3%A8%EA%B8%B0" target="_blank">React Key</a>
+* <a href="https://www.nextree.io/riaegteu-rendeoring-mic-coejeoghwa/" target="_blank">리액트 랜더링 및 최적화</a>
+* <a href="https://react.vlpt.us/" target="_blank">벨로퍼트와 함께하는 모던 리액트</a>
 
 
 ### 영상
-* 벨로퍼트와 함께하는 모던 리액트 - https://youtu.be/HHKV9XbXUOw?si=-8fnEYhdrl9RnuxH
+* <a href="https://youtu.be/HHKV9XbXUOw?si=-8fnEYhdrl9RnuxH" target="_blank">벨로퍼트와 함께하는 모던 리액트</a>
 
 <br /><br />
   
@@ -31,14 +30,14 @@
 특정한 DOM요소에 접근이 가능하면, 불필요한 재렌더링을 하지 않는다
  
 #### useRef 생성
-``` typescript
+``` ts
 const 변수명 = useRef(초기값) // {current:  초기값}  을 지닌 객체가 반환
 ```
 * current라는 키값을 지닌 프로퍼티가 생성되고, 값에 어떤 변경을 줄때도 이 current를 이용해서 변경 한다
 
 
 #### useRef 사용
-``` typescript
+``` ts
 <input ref= {변수명}/>
 ```
 * ref는 state와 비슷하게 어떤 값을 저장하는 저장공간으로 사용
@@ -56,7 +55,7 @@ const 변수명 = useRef(초기값) // {current:  초기값}  을 지닌 객체�
 
 
 #### useRef 요약
-```typescript
+```ts
 //생성 
 const 변수명 = useRef(초기값)
 // {current: 초기값} 을 지닌 객체가 반환됨 
@@ -73,31 +72,6 @@ const 변수명 = useRef(초기값)
 ### FormEventHandler
 ### provider
 ### Context API
-
-### Day.js
-
-* dayjs .fromNow 사용하게 해주는 플러그인 - https://day.js.org/docs/en/plugin/relative-time
-``` typescript
-var relativeTime = require('dayjs/plugin/relativeTime')
-dayjs.extend(relativeTime)
-
-dayjs(/* 타겟날짜 */).fromNow(true)
-
-// 타겟날짜부터 지금까지의 상대 시간을 반환
-// ex) 몇 초, 몇 분, 몇 시간, 
-```
-
-* dayjs/locale/ko - https://day.js.org/docs/en/durations/locale#docsNav
-``` typescript
-// This requires the RelativeTime plugin to work
-require('dayjs/locale/es')
-
-dayjs.duration(1, "minutes").locale("en").humanize(); // a minute
-dayjs.duration(1, "minutes").locale("es").humanize(); // un minuto
-
-// locale 을 사용하여 지역을 설정하거나 가져 올 수 있음
-```
-
 
 ### TTFB, FP, FCP
 * TTFB(Time to First Byte) - HTTP 요청을 보낼 경우, 서버에서부터 첫번째 Byte (정보) 가 오기까지 걸리는 시간
@@ -157,6 +131,57 @@ ReactDOM.render(element, container[, callback])
 #### hydrate()
   * `ReactDOM.hydrate()` 함수는 특정 컴포넌트를 두번째 파라미터인 지정된 DOM 요소에 하위로 Hydrate.
   * 렌더링을 통해 새로운 웹페이지를 구성하는 것이 아니라 기존 DOM Tree에서 해당되는 DOM 요소를 찾아 정해진 자바스크립트 속성들만 적용.
+
+## Librarys
+### <a href="https://www.npmjs.com/package/dayjs" target="_blank">dayjs</a>
+
+* dayjs .fromNow 사용하게 해주는 플러그인 - https://day.js.org/docs/en/plugin/relative-time
+``` ts
+var relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
+
+dayjs(/* 타겟날짜 */).fromNow(true)
+
+// 타겟날짜부터 지금까지의 상대 시간을 반환
+// ex) 몇 초, 몇 분, 몇 시간, 
+```
+
+* dayjs/locale/ko - https://day.js.org/docs/en/durations/locale#docsNav
+``` ts
+// This requires the RelativeTime plugin to work
+require('dayjs/locale/es')
+
+dayjs.duration(1, "minutes").locale("en").humanize(); // a minute
+dayjs.duration(1, "minutes").locale("es").humanize(); // un minuto
+
+// locale 을 사용하여 지역을 설정하거나 가져 올 수 있음
+```
+
+### <a href="https://www.npmjs.com/package/classnames" target="_blank">classnames</a>
+조건부로 클래스 합성 해줄때 사용하는 라이브러리.  
+객체, 배열 및 문자열 인수를 함께 혼합할 수 있기 때문에 선택적인 className props를 지원하고 결과에 실제 인수만 포함 됨
+
+사용방법
+``` ts
+classNames('foo', 'bar'); // => 'foo bar'
+classNames('foo', { bar: true }); // => 'foo bar'
+classNames({ 'foo-bar': true }); // => 'foo-bar'
+classNames({ 'foo-bar': false }); // => ''
+classNames({ foo: true }, { bar: true }); // => 'foo bar'
+classNames({ foo: true, bar: true }); // => 'foo bar'
+
+// lots of arguments of various types
+classNames('foo', { bar: true, duck: false }, 'baz', { quux: true }); // => 'foo bar baz quux'
+
+// other falsy values are just ignored
+classNames(null, false, 'bar', undefined, 0, 1, { baz: null }, ''); // => 'bar 1'
+```
+
+배열은 다음의 규칙에 따라 재귀적으로 평면화 됨
+``` ts
+const arr = ['b', { c: true, d: false }];
+classNames('a', arr); // => 'a b c'
+```
 
 
 ## Error
