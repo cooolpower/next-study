@@ -11,9 +11,10 @@ import Logoutbutton from "@/app/(afterLogin)/_component/logoutbutton";
 
 type Props = {
   children: React.ReactNode;
+  modal: React.ReactNode;
 };
 
-export default function afterLoginLayout({ children }: Props) {
+export default function afterLoginLayout({ children, modal }: Props) {
   return (
     <div className={style.container}>
       <div className={style.leftSectionWrapper}>
@@ -55,6 +56,7 @@ export default function afterLoginLayout({ children }: Props) {
           </section>
         </div>
       </div>
+      {modal}
     </div>
   );
 }

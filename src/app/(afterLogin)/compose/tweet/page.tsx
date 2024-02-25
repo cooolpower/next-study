@@ -1,5 +1,7 @@
-import React from "react";
+import Tweet from '@/app/(afterLogin)/_component/tweet';
 
-export default function Tweet() {
-  return <div>Tweet</div>;
+export default function TweetModal() {
+  return (
+    <Tweet />
+  );
 }
