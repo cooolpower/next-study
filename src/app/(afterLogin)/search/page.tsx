@@ -1,3 +1,11 @@
+import Searchform from "@/app/(afterLogin)/_component/searchform";
+import TrendSection from "@/app/(afterLogin)/_component/trendsection";
+
 export default function Search() {
-  return <div>검색페이지</div>;
+  return (
+    <>
+      <Searchform />
+      <TrendSection />
+    </>
+  );
 }
