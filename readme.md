@@ -25,6 +25,8 @@
 
 ### 2/21 ~ 2/28
 
+### 2/28 ~ 3/5
+
 ### useRef
 
 특정한 DOM요소에 접근이 가능하면, 불필요한 재렌더링을 하지 않는다
@@ -209,6 +211,114 @@ classNames("a", arr); // => 'a b c'
 ### <a href="https://www.npmjs.com/package/@faker-js/faker" target="_blank">@faker-js/faker</a>
 
 진짜 같은 가짜 데이터를 생성해주는 라이브러리
+
+### <a href="https://mswjs.io/" target="_blank">msw</a>
+
+```JavaScript
+npm install msw -D
+npx msw init public/ --save
+```
+
+- 실제 백엔드 서버로 보내는 요청을 가로챌 수 있음
+- 프론트 개발자가 임의로 응답을 만들어낼 수 있음(성공, 400, 500 에러 모두 가능)
+
+#### msw issues
+
+- pnpm 으로 설치 시 모듈 찾을 수 없음
+- 현재 [이슈](https://github.com/mswjs/msw/issues/1644)로 msw 서버에서 사용 불가
+  - Next 자체가 내부적으로 구현되는 방식으로 인해 Next.js 13에서 프로세스 전체 논리를 설정하는 데 어려움이 있음을 발견
+  - 특정 페이지의 레이아웃에 대해 업데이트가 실행되면 간헐적인 프로세스가 종료되고 새 프로세스가 생성되어 업데이트를 보류 상태를 유지할 가능성이 높음.
+- 위 이슈 해결되기 전까지는 http 서버 직접 생성
+
+## Server Actions
+
+- 회원가입에 적용하기(Next 14부터 가능)
+- 클라이언트 컴포넌트에서도 server action 함수를 import 해서 사용 가능
+- 폼 검사를 위해 useFormState와 useFormStatus 적용하기
+
+### ["use server"](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions)
+
+- Server Actions은 React Actions 위에 구축된 Next.js의 알파 기능
+- 서버 컴포넌트 내에서 정의하거나 클라이언트 컴포넌트에서 호출할 수 있음
+- React Server Components 규약을 기반으로 직렬화 가능한 인수와 직렬화 가능한 반환 값 필요
+
+#### 서버 컴포넌트
+
+함수 본문의 맨 위에 "use server" 지시어를 사용하여 비동기 함수를 정의하여 Server Actions을 작성
+
+```ts
+import { cookies } from "next/headers";
+
+// Server action defined inside a Server Component
+export default function AddToCart({ productId }) {
+  async function addItem(data) {
+    "use server";
+
+    const cartId = cookies().get("cartId")?.value;
+    await saveToDb({ cartId, data });
+  }
+
+  return (
+    <form action={addItem}>
+      <button type="submit">Add to Cart</button>
+    </form>
+  );
+}
+```
+
+#### 클라이언트 컴포넌트
+
+파일 상단에 "use server" 지시사항이 있는 별도의 파일에 action을 작성 후 Server Actions을 클라이언트 컴포넌트로 가져옴
+
+```ts
+///////////////////////////////
+// app/actions.js
+"use server";
+
+export async function addItem(data) {
+  const cartId = cookies().get("cartId")?.value;
+  await saveToDb({ cartId, data });
+}
+
+///////////////////////////////
+// app/add-to-cart.js
+("use client");
+
+import { addItem } from "./actions.js";
+
+// Server Action being called inside a Client Component
+export default function AddToCart({ productId }) {
+  return (
+    <form action={addItem}>
+      <button type="submit">Add to Cart</button>
+    </form>
+  );
+}
+```
+
+#### Server Actions Form Forms
+
+revalidatePath("/"); 를 사용해야 새로고침하지 않아도 데이터 업데이트를 바로 확인 가능
+
+```plain text
+- revalidatePath를 사용하면 특정 경로와 연결된 데이터를 다시 확인가능.
+- 이 기능은 재검증 기간이 만료될 때까지 기다리지 않고 캐시된 데이터를 업데이트 할 때 유용.
+```
+
+#### Cookie
+
+```ts
+"use server"
+  const response = await fetch(`${precess.env.NEXT_PUBLIC_API_MOCKING}/api/users`{
+    method: 'post',
+    body: formData,
+    credentials: 'include',  // 없으면 쿠키 전달 안됨 (로그인 유무 확인 등...)
+  });
+```
+
+#### redirect()
+
+try, catch 안에서 사용 불가
 
 ## Error
 

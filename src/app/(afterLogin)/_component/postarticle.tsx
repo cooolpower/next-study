@@ -7,12 +7,12 @@ type Props = {
   children: React.ReactNode;
   post: {
     postid: number;
-    content: string;
     user: {
       id: string;
       image: string;
       nickname: string;
     };
+    content: string;
     createdAt: Date;
     images: any[];
   };
