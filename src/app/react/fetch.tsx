@@ -1,7 +1,3 @@
-// async function getArtist() {
-//   const res = await fetch(`https://jsonplaceholder.typicode.com/comments/1`);
-//   return res.json();
-// }
 "use client";
 
 import { useEffect, useState } from "react";
@@ -12,7 +8,7 @@ export default function Fetch() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://jsonplaceholder.typicode.com/users/",
+          "https://jsonplaceholder.typicode.com/users/"
         );
 
         const jsonData = await response.json();
@@ -25,7 +21,5 @@ export default function Fetch() {
     fetchData();
   }, []);
 
-  return (
-    data.map((item, idx) => <div key={Math.random()}>{item.id}</div>)
-  );
+  return data.map((item, idx) => <div key={Math.random()}>{item.id}</div>);
 }

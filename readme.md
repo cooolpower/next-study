@@ -27,6 +27,16 @@
 
 ### 2/28 ~ 3/5
 
+### 3/6 ~ 3/12
+
+- useFormState()
+- useFormStatus()
+- middleware
+- Catch-all Segment
+- Server Actions
+- authjs
+- error - import/no-anonymous-default-export
+
 ### useRef
 
 특정한 DOM요소에 접근이 가능하면, 불필요한 재렌더링을 하지 않는다
@@ -151,6 +161,166 @@ ReactDOM.render(element, container[, callback])
 - `ReactDOM.hydrate()` 함수는 특정 컴포넌트를 두번째 파라미터인 지정된 DOM 요소에 하위로 Hydrate.
 - 렌더링을 통해 새로운 웹페이지를 구성하는 것이 아니라 기존 DOM Tree에서 해당되는 DOM 요소를 찾아 정해진 자바스크립트 속성들만 적용.
 
+### useFormState()
+
+- react 에서 지원
+
+useFormState는 form작업의 결과에 따라 상태를 업데이트할 수 있는 Hook
+
+```ts
+const [state, formAction] = useFormState(fn, initialState, permalink?);
+```
+
+#### Reference
+
+`useFormState(action, initialState, permalink?)`
+
+- useFormState에 기존 양식 작업 함수와 초기 상태를 전달하면 최신 양식 상태와 함께 양식에서 사용하는 새 작업이 반환됩니다.
+- 최신 양식 상태는 제공한 함수에도 전달됩니다.
+
+```ts
+import { useFormState } from "react-dom";
+
+async function increment(previousState, formData) {
+  return previousState + 1;
+}
+
+function StatefulForm({}) {
+  const [state, formAction] = useFormState(increment, 0);
+  return (
+    <form>
+      {state}
+      <button formAction={formAction}>Increment</button>
+    </form>
+  );
+}
+```
+
+- 양식이 마지막으로 제출되었을 때 작업에 의해 반환된 값
+- 양식이 아직 제출되지 않은 경우 통과한 초기 상태
+- 서버 작업과 함께 사용하는 경우 useFormState를 사용하면 hydration이 완료되기 전에도 서버의 form 내용 제출 응답이 표시될 수 있음.
+
+#### Parameters
+
+- fn: 양식을 제출하거나 버튼을 눌렀을 때 호출되는 함수입니다. 함수가 호출되면 form의 이전 상태(처음에는 전달한 초기 상태, 이후에는 이전 반환 값)를 초기 인수로 수신하고 그 뒤에는 양식 작업이 일반적으로 수신하는 인수가 이어짐.
+- initialState: 초기상태 값. 직렬화 가능한 모든 값이 될 수 있음. 이 인수는 작업이 처음 호출된 후에는 무시됨.
+- permalink: 이 양식이 수정하는 고유한 페이지 URL이 포함된 문자열. 점진적 개선과 함께 동적 콘텐츠(예: 피드)가 있는 페이지에서 사용.
+  - 만약에 fn이 서버 작업이고 JavaScript 번들이 로드되기 전에 form 내용이 제출되면 브라우저는 현재 페이지의 URL이 아닌 지정된 영구 링크 URL로 이동.
+  - React가 상태를 전달하는 방법을 알 수 있도록 동일한 form 구성 요소가 대상 페이지(동일한 작업 fn 및 영구 링크 포함)에 렌더링되는지 확인필요. 양식이 hydrated되면 이 매개변수는 효과가 없음.
+
+#### 주의사항
+
+- React Server 구성 요소를 지원하는 프레임워크와 함께 useFormState를 사용하면 JavaScript가 클라이언트에서 실행되기 전에 interactive한 양식을 만들 수 있음. 서버 구성 요소 없이 사용되는 경우 구성 요소 로컬 상태와 동일.
+- useFormState에 전달된 함수는 첫 번째 인수로 이전 또는 초기 상태인 추가 인수 받음. 이로 인해 useFormState를 사용하지 않고 양식 작업으로 직접 사용된 경우와 서명이 달라짐.
+
+#### Returns
+
+useFormState는 두 개의 값이 있는 배열을 반환
+
+- 현재 상태. 첫 번째 렌더링 중에는 전달한 초기 상태와 같음. 호출된 후에는 작업에서 반환된 값과 같음.
+- form 구성 요소에 action prop을 전달하거나 form 내의 버튼 구성 요소에 formAction prop을 전달할 수 있는 새로운 동작.
+
+### useFormStatus()
+
+- react 에서 지원
+
+```ts
+const { pending, data, method, action } = useFormStatus();
+```
+
+#### Reference
+
+useFormStatus Hook은 양식 제출의 상태 정보를 제공
+
+```ts
+import { useFormStatus } from "react-dom";
+import action from "./actions";
+
+function Submit() {
+  const status = useFormStatus();
+  return <button disabled={status.pending}>Submit</button>;
+}
+
+export default function App() {
+  return (
+    <form action={action}>
+      <Submit />
+    </form>
+  );
+}
+```
+
+#### Parameters
+
+useFormStatus는 매개변수를 사용하지 않음
+
+#### Returns
+
+- pending: `true`나 `false`중 `true` 인 경우 상위 `<form>`이 대기중임을 의미하고 그렇지 않으면 `false` .
+
+- data: 상위 `<form>`이 제출하는 데이터가 포함된 `FormData` 인터페이스를 구현하는 개체. 전송할 데이터가 없거나 상위 `<form>`이 없으면 `null`.
+
+- method: `'get'`과 `'post'`는 문자열 값. 이는 상위 `<form>`이 `GET` 또는 `POST`인 HTTP메소드로 제출하는지 여부를 나타냄.  
+  기본적으로 `<form>`은 GET속성을 사용하고 `method`속성으로 지정할 수 있음.
+
+- actionaction: 상위 `<form>`의 `action prop`에 전달된 함수에 대한 참조. 상위 `<form>`이 없으면 속성은 `null`.  
+  `action prop`에 `URI` 값이 제공되거나 지정된 `action prop`이 없으면 `status.action`은 `null`.
+
+#### 주의사항
+
+- useFormStatus hook은 `<form>` 내부에 렌더링되는 구성 요소에서 호출되어야 합니다.
+- 상태 정보를 얻으려면 제출할 구성 요소가 `<form>` 내에서 렌더링되어야 합니다. hook은 양식이 적극적으로 제출되고 있는지 알려주는 `pending` 속성과 같은 정보를 반환합니다.
+- useFormStatus는 상위 `<form>`에 대한 상태 정보만 반환합니다. 동일한 구성 요소나 하위 구성 요소에서 렌더링된 `<form>`에 대한 상태 정보를 반환하지 않습니다.
+
+#### 사용방법
+
+**양식 제출 중 보류 상태 표시**
+
+양식이 제출되는 동안 보류 상태를 표시하려면 `<form>`에 렌더링된 구성 요소에서 `useFormStatus` hook을 호출하고 반환된 보류 속성을 읽을 수 있습니다.
+
+```ts
+import { useFormStatus } from "react-dom";
+import { submitForm } from "./actions.js";
+
+function Submit() {
+  const { pending } = useFormStatus();
+  return (
+    <button type="submit" disabled={pending}>
+      {pending ? "Submitting..." : "Submit"}
+    </button>
+  );
+}
+
+function Form({ action }) {
+  return (
+    <form action={action}>
+      <Submit />
+    </form>
+  );
+}
+
+export default function App() {
+  return <Form action={submitForm} />;
+}
+```
+
+### middleware
+
+- App Router 에서 지원하는 기능
+- 로그인 상태에 따른 페이지 노출 설정
+- matcher 에 설정된 라우트는 페이지 렌더링 되기 전 미들웨어 함수가 실행됨. (로그인 했으면 통과, 로그인 안했으면 설정한 페이지로 이동)
+
+### Catch-all Segment
+
+- Catch-all 라우트
+- `[...folderName]`
+
+| Route                      | Example URL | params                    |
+| -------------------------- | ----------- | ------------------------- |
+| app/shop/[...slug]/page.js | /shop/a     | { slug: ['a'] }           |
+| app/shop/[...slug]/page.js | /shop/a/b   | { slug: ['a', 'b'] }      |
+| app/shop/[...slug]/page.js | /shop/a/b/c | { slug: ['a', 'b', 'c'] } |
+
 ## Librarys
 
 ### <a href="https://www.npmjs.com/package/dayjs" target="_blank">dayjs</a>
@@ -230,6 +400,10 @@ npx msw init public/ --save
   - 특정 페이지의 레이아웃에 대해 업데이트가 실행되면 간헐적인 프로세스가 종료되고 새 프로세스가 생성되어 업데이트를 보류 상태를 유지할 가능성이 높음.
 - 위 이슈 해결되기 전까지는 http 서버 직접 생성
 
+### <a href="https://authjs.dev/" target="_blank">authjs</a>
+
+로그인, 로그아웃, 내정보 불러오기 기능 사용
+
 ## Server Actions
 
 - 회원가입에 적용하기(Next 14부터 가능)
@@ -271,7 +445,6 @@ export default function AddToCart({ productId }) {
 파일 상단에 "use server" 지시사항이 있는 별도의 파일에 action을 작성 후 Server Actions을 클라이언트 컴포넌트로 가져옴
 
 ```ts
-///////////////////////////////
 // app/actions.js
 "use server";
 
@@ -280,13 +453,12 @@ export async function addItem(data) {
   await saveToDb({ cartId, data });
 }
 
-///////////////////////////////
 // app/add-to-cart.js
 ("use client");
 
 import { addItem } from "./actions.js";
 
-// Server Action being called inside a Client Component
+// Server Action 이 Client Component 내부에서 호출됨
 export default function AddToCart({ productId }) {
   return (
     <form action={addItem}>
@@ -342,3 +514,18 @@ Error: Hydration failed because the initial UI does not match what was rendered 
 
 - 하나의 함수를 서버에서도 한 번, 클라이언트에서도 한 번 실행하게 되면 함수 실행 결과가 랜덤이라 매 번 값이 달라지니 자연히 "서버와 클라이언트의 text content가 같지 않다"는 오류가 발생.
 - 클라이언트단 작업을 위해 '임시'로 랜덤한 데이터를 내려주기로 한 것 때문에 생기는 오류라 랜덤 함수를 없애면 해결 됨.
+
+```plaintext
+Assign arrow function to a variable before exporting as module default import/no-anonymous-default-export
+```
+
+- 문서 내부에서 어떤 데이터를 직접적으로 내보낼 때 생기는 오류
+
+```ts
+export default = { a : 1, b : 2}
+// error
+
+const obj = { a : 1, b : 2}
+export default obj
+// not error
+```
