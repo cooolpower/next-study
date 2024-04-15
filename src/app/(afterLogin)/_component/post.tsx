@@ -22,7 +22,7 @@ export default function Post({ noImage }: Props) {
   const target = {
     postid: 1,
     user: {
-      id: "cooolpower",
+      id: "jameskim",
       image: "/5Udwvqim.jpg",
       nickname: "라떼아빠",
     },
@@ -31,12 +31,12 @@ export default function Post({ noImage }: Props) {
     images: [] as any[],
   };
 
-  if (Math.random() > 0.5 && !noImage) {
+  if (Math.random() > 0 && !noImage) {
     target.images.push(
-      { imageId: 1, link: faker.image.urlLoremFlickr() }
-      // { imageId: 2, link: faker.image.urlLoremFlickr() },
-      // { imageId: 3, link: faker.image.urlLoremFlickr() },
-      // { imageId: 4, link: faker.image.urlLoremFlickr() }
+      { imageId: 1, link: faker.image.urlPicsumPhotos() },
+      { imageId: 2, link: faker.image.urlPicsumPhotos() },
+      { imageId: 3, link: faker.image.urlPicsumPhotos() },
+      { imageId: 4, link: faker.image.urlPicsumPhotos() }
     );
   }
 

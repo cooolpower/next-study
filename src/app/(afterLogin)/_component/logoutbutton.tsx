@@ -5,13 +5,11 @@ import style from "./logoutbutton.module.css";
 
 export default function Logoutbutton() {
   const me = {
-    id: "cooolpower",
+    id: "jameskim",
     nickname: "라떼아빠",
     image: "/5Udwvqim.jpg",
   };
-  const onLogOut = () => {
-    alert("logouted");
-  };
+  const onLogOut = () => {};
 
   return (
     <button className={style.logOutButton} onClick={onLogOut}>
