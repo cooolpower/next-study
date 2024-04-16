@@ -6,6 +6,7 @@ import TrendSection from "@/app/(afterLogin)/_component/trendsection";
 import FollowSection from "@/app/(afterLogin)/_component/followsection";
 import Logoutbutton from "@/app/(afterLogin)/_component/logoutbutton";
 import Rightsearch from "@/app/(afterLogin)/_component/rightsearch";
+import RQProvider from "@/app/(afterLogin)/_component/RQProvider";
 
 type Props = {
   children: React.ReactNode;
@@ -55,17 +56,19 @@ export default function afterLoginLayout({ children, modal }: Props) {
           </div>
         </section>
       </div>
-      <div className={style.rightSectionWrapper}>
-        <div className={style.rightSectionInner}>
-          <main className={style.main}>{children}</main>
-          <section className={style.rightSection}>
-            <Rightsearch />
-            <TrendSection />
-            <FollowSection />
-          </section>
+      <RQProvider>
+        <div className={style.rightSectionWrapper}>
+          <div className={style.rightSectionInner}>
+            <main className={style.main}>{children}</main>
+            <section className={style.rightSection}>
+              <Rightsearch />
+              <TrendSection />
+              <FollowSection />
+            </section>
+          </div>
         </div>
-      </div>
-      {modal}
+        {modal}
+      </RQProvider>
     </div>
   );
 }

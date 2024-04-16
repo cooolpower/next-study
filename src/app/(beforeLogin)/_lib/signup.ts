@@ -26,7 +26,7 @@ export default async (prevState: any, formData: FormData) => {
         method: "post",
         body: formData,
         credentials: "include",
-      }
+      },
     );
     console.log(response.status);
     if (response.status === 403) {
@@ -41,4 +41,5 @@ export default async (prevState: any, formData: FormData) => {
   if (shouldRedirect) {
     redirect("/home");
   }
+  return { message: null };
 };

@@ -3,7 +3,7 @@
 import style from "./login-modal.module.css";
 import { redirect, useRouter } from "next/navigation";
 import { ChangeEventHandler, FormEventHandler, useState } from "react";
-import BackButton from "./backbutton";
+import BackButton from "../../_components/backbutton";
 //import { signIn } from "@/auth"; // 서버일때
 import { signIn } from "next-auth/react"; // 클라이언트일때
 
