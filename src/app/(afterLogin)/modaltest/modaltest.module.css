@@ -1,0 +1,10 @@
+.layerBox {
+  display: none;
+  width: 100px;
+  height: 100px;
+}
+
+.layerBox.active {
+  display: block;
+  background-color: rgba(126, 178, 255, 0.582);
+}
