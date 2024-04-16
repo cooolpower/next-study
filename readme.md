@@ -13,7 +13,7 @@
 
 - <a href="https://velog.io/@ssoon-m/react-key-%EC%A0%9C%EB%8C%80%EB%A1%9C-%EB%8B%A4%EB%A3%A8%EA%B8%B0" target="_blank">React Key</a>
 - <a href="https://www.nextree.io/riaegteu-rendeoring-mic-coejeoghwa/" target="_blank">리액트 랜더링 및 최적화</a>
-- <a href="https://react.vlpt.us/" target="_blank">벨로퍼트와 함께하는 모던 리액트</a>
+- <a href="https://react.vlpt.us/" target="_blank">벨로퍼트와 함께하는 모던 리액트</a>ddd
 
 ### 영상
 
