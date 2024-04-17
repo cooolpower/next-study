@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "../../../public/zlogo.png";
+import Logo from "../../../../public/zlogo.png";
 import style from "./main-login.module.css";
 
 export default function MainLogin() {

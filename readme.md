@@ -404,6 +404,10 @@ npx msw init public/ --save
 
 로그인, 로그아웃, 내정보 불러오기 기능 사용
 
+### <a href="https://tanstack.com/" target="_blank">tanstack query</a>
+
+강력한 비동기식 상태 관리, 서버 상태 유틸리티 및 데이터 가져오기
+
 ## Server Actions
 
 - 회원가입에 적용하기(Next 14부터 가능)

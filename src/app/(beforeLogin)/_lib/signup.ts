@@ -15,9 +15,9 @@ export default async (prevState: any, formData: FormData) => {
   ) {
     return { message: "no_password" };
   }
-  if (!formData.get("image")) {
-    return { message: "no_file" };
-  }
+  // if (!formData.get("image")) {
+  //   return { message: "no_file" };
+  // }
   let shouldRedirect = false;
   try {
     const response = await fetch(

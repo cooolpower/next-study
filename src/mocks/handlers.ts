@@ -13,12 +13,12 @@ const User = [
   {
     id: "elonmusk",
     nickname: "Elon Musk",
-    image: "/yRsRRjGO.jpg",
+    image: faker.image.avatar()
   },
   {
     id: "zerohch0",
     nickname: "제로초",
-    image: "/5Udwvqim.jpg",
+    image: faker.image.avatar(),
   },
   {
     id: "cooolpower",

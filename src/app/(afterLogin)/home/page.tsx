@@ -29,22 +29,22 @@ async function getPostRecommends(){
 
 export default async function Home() {
   const queryClient = new QueryClient();
-  const queryClient.prefetchQuery({queryKey: ['posts', 'recommends'],
-  queryFn: getPostRecommends});
+  queryClient.prefetchQuery({queryKey: ['posts', 'recommends'],
+  queryFn: getPostRecommends})
   const dehydratedState = dehydrate(queryClient);
 
   return (
     <main className={style.main}>
       <HydrationBoundary state={dehydratedState}>
-      <TabProvider>
-        <Tab />
-        <PostForm />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-      </TabProvider>
+        <TabProvider>
+          <Tab />
+          <PostForm />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+        </TabProvider>
       </HydrationBoundary>
     </main>
   );

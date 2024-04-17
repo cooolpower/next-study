@@ -86,7 +86,7 @@ export default function SignupModal() {
                   className={style.input}
                   type="file"
                   accept="image/*"
-                  required
+                  //required
                 />
               </div>
             </div>
