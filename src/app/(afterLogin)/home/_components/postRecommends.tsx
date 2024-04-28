@@ -1,12 +1,14 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { getPostRecommends } from "@/app/(afterLogin)/home/_lib/getPostRecommends";
 import Post from "@/app/(afterLogin)/_component/post";
 import { Post as IPost } from "@/app/model/post";
 
+type Props = { pageParam: number };
+
 export default function PostRecommends() {
-  const { data } = useQuery<IPost[]>({
+  const { data } = useInfiniteQuery<IPost[], number>({
     queryKey: ["posts", "recommends"],
     queryFn: getPostRecommends,
     staleTime: 60 * 1000, // fresh -> stale, 5분이라는 기준
